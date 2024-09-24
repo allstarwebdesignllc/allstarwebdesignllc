@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>All-Star Web Design LLC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic resets */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* Colors based on MD3 */
+        .primary {
+            color: #1e40af;
+        }
+
+        .accent-red {
+            color: #d32f2f;
+        }
+
+        .accent-blue {
+            color: #1565c0;
+        }
+
+        /* Layout */
+        header, section, footer {
+            padding: 20px;
+            text-align: center;
+        }
+
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s ease;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #555;
+        }
+
+        /* Hero section */
+        .hero {
+            padding: 60px 20px;
+            background: linear-gradient(145deg, #ffffff, #e3f2fd);
+            animation: fadeUp 2s ease;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #1e40af;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+
+        .sayings {
+            font-size: 1.3rem;
+            color: #d32f2f;
+            font-style: italic;
+            margin: 20px 0;
+            animation: fadeUp 2.5s ease;
+        }
+
+        /* Service description */
+        .services {
+            padding: 40px 20px;
+            background-color: #f0f8ff;
+        }
+
+        .services h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .placeholder {
+            border: 2px dashed #c5cae9;
+            padding: 30px;
+            margin: 20px 0;
+            background-color: #ffffff;
+            border-radius: 8px;
+            animation: fadeIn 1s ease;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CTA button */
+        .cta-btn {
+            display: inline-block;
+            background-color: #1e40af;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: #1565c0;
+        }
+
+        footer {
+            background-color: #ffffff;
+            padding: 20px 0;
+            font-size: 0.9rem;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .hero h2 {
+                font-size: 3.5rem;
+            }
+
+            .hero p, .sayings {
+                font-size: 1.5rem;
+            }
+
+            .cta-btn {
+                padding: 14px 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>All-Star Web Design LLC</h1>
+        <p class="tagline">First Impressions Matter, We Make Them Memorable</p>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2 class="primary">Perception is Reality</h2>
+        <p>At All-Star Web Design, we focus on landing pages that captivate and convert.</p>
+        <div class="sayings">"The big agency world is all smoke and mirrors."</div>
+        <a href="#services" class="cta-btn">Learn More</a>
+    </section>
+
+    <!-- Service Description Section -->
+    <section class="services" id="services">
+        <h2 class="accent-blue">Our Services</h2>
+        <p>Landing pages that convert, branding that stands out, and marketing strategies that work.</p>
+        <div class="placeholder">[Insert service-related image or graphic here, e.g., a laptop with a website design or marketing icons]</div>
+        <p class="accent-red">"Marketing is simply finding out what people want, and giving it to them."</p>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>All-Star Web Design LLC &copy; 2024</p>
+        <p>Contact us at <a href="mailto:hello@allstarwebdesignllc.com">hello@allstarwebdesignllc.com</a></p>
+    </footer>
+
+</body>
+</html>
