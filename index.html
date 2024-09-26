@@ -23,29 +23,45 @@
       z-index: 1000;
     }
 
-    /* Hero section customization */
-    .hero-section {
-      min-height: 100vh;
+    /* Left-side logo */
+    .brand {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1.5rem;
       display: flex;
-      justify-content: center;
       align-items: center;
-      text-align: center;
-      background-color: #ffffff;
-      padding: 1rem;
     }
 
-    /* Hamburger menu for mobile */
+    .brand span {
+      margin-left: 0.5rem;
+    }
+
+    /* Hamburger menu */
     .hamburger {
       display: none;
       flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 22px;
       cursor: pointer;
+      transition: all 0.3s ease-in-out;
     }
 
     .hamburger div {
-      width: 25px;
       height: 3px;
       background-color: #333;
-      margin: 4px 0;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .hamburger.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
     }
 
     /* Mobile responsive nav menu */
@@ -59,10 +75,21 @@
         display: none;
         flex-direction: column;
         gap: 1rem;
+        background-color: white;
+        padding: 1rem;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        max-width: 300px;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+        transform: translateY(-100%);
       }
 
       nav ul.active {
-        display: flex;
+        transform: translateY(0);
       }
 
       .hamburger {
@@ -107,15 +134,21 @@
 
   <!-- Header -->
   <header class="container">
-    <nav>
-      <ul>
-        <li><strong>All-Star Web Design LLC</strong></li>
-      </ul>
+    <nav class="grid">
+      <!-- Left side: All-Star with star icon -->
+      <div class="brand">
+        <span>&#9733;</span> <!-- HTML Star -->
+        <span>All-Star</span>
+      </div>
+
+      <!-- Right side: Hamburger menu -->
       <div class="hamburger" onclick="toggleMenu()">
         <div></div>
         <div></div>
         <div></div>
       </div>
+
+      <!-- Mobile nav menu -->
       <ul id="menu">
         <li><a href="#services">Services</a></li>
         <li><a href="#about">About Us</a></li>
@@ -167,7 +200,9 @@
     // Mobile menu toggle
     function toggleMenu() {
       const menu = document.getElementById('menu');
+      const hamburger = document.querySelector('.hamburger');
       menu.classList.toggle('active');
+      hamburger.classList.toggle('active');
     }
   </script>
 
