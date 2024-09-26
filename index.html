@@ -1,136 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>All-Star Web Design LLC</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-            color: #333;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="All-Star Web Design LLC - Stellar websites for pre-launch companies that want to make a big impact.">
+  <title>All-Star Web Design LLC</title>
+  <!-- Link to Pico CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+  <style>
+    /* Additional styling for animations and customizations */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-color: #f5f5f5;
+      animation: fadeIn 1.5s ease-in-out;
+    }
 
-        header {
-            background-color: #fff;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 2px solid #ececec;
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-        h1 {
-            font-size: 2.5rem;
-            color: #1a1a1a;
-        }
+    .services {
+      padding: 3rem 0;
+    }
 
-        .tagline {
-            font-size: 1.2rem;
-            color: #888;
-        }
+    .email-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 5px;
+      border: none;
+      transition: background-color 0.3s ease-in-out;
+    }
 
-        section {
-            padding: 40px 20px;
-            text-align: center;
-        }
+    .email-btn:hover {
+      background-color: #0056b3;
+    }
 
-        /* Blue and red accent colors */
-        .accent-red {
-            color: #ff4b4b;
-        }
-
-        .accent-blue {
-            color: #007bff;
-        }
-
-        .hero {
-            background-color: #f9f9f9;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .hero h2 {
-            font-size: 2rem;
-            color: #1a1a1a;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: #555;
-            margin: 20px 0;
-        }
-
-        .sayings {
-            margin: 40px 0;
-            color: #007bff;
-            font-style: italic;
-            font-size: 1.5rem;
-        }
-
-        /* Placeholder section for images/icons */
-        .placeholder {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 2px dashed #ececec;
-            background-color: #f0f8ff;
-            color: #555;
-        }
-
-        footer {
-            background-color: #fff;
-            padding: 30px;
-            text-align: center;
-            border-top: 2px solid #ececec;
-            font-size: 0.9rem;
-        }
-
-        /* Add star accents */
-        .star {
-            color: #ff4b4b;
-            font-size: 2rem;
-        }
-
-    </style>
+    footer {
+      background-color: #222;
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <h1>All-Star Web Design LLC</h1>
-        <p class="tagline">Transforming first impressions, one landing page at a time</p>
-    </header>
+  <!-- Header -->
+  <header class="container">
+    <nav>
+      <ul>
+        <li><strong>All-Star Web Design LLC</strong></li>
+      </ul>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h2 class="accent-blue">Perception is reality</h2>
-        <p>At All-Star Web Design, we help you make the right first impression.</p>
-        <div class="sayings accent-red">"The big agency world is all smoke and mirrors."</div>
-    </section>
+  <!-- Hero Section -->
+  <section class="hero-section container">
+    <div>
+      <h1>Welcome to All-Star Web Design LLC</h1>
+      <p>We build stellar websites for pre-launch companies to give you the look and feel of a big brand.</p>
+      <a href="#contact" class="email-btn">Contact Us</a>
+    </div>
+  </section>
 
-    <!-- Placeholder for your service description -->
-    <section>
-        <h2>What We Do</h2>
-        <p class="accent-blue">Landing pages, branding, and digital marketing that work for you.</p>
-        <div class="placeholder">[Insert image or graphic here, such as a laptop or a marketing-related icon]</div>
-        <p class="accent-red">"Marketing is simply finding out what people want, and giving it to them."</p>
-    </section>
+  <!-- Services Section -->
+  <section id="services" class="services container">
+    <h2>Our Services</h2>
+    <p>"Perception is reality." We make sure your first impression counts.</p>
+    <ul>
+      <li>Website Audits</li>
+      <li>Custom Web Design</li>
+      <li>Landing Page Development</li>
+      <li>SEO Optimization</li>
+      <li>UX/UI Strategy & Design</li>
+    </ul>
+  </section>
 
-    <!-- Placeholder for services offered -->
-    <section>
-        <h2 class="accent-blue">Our Services</h2>
-        <div class="placeholder">[List your services here, e.g., "Custom landing pages," "Brand consulting," "SEO optimization"]</div>
-    </section>
+  <!-- About Us Section -->
+  <section id="about" class="container">
+    <h2>About Us</h2>
+    <p>At All-Star Web Design LLC, we believe that "marketing is simply finding out what people want, and giving it to them." We specialize in landing pages that provide the perception of scale for pre-launch companies. The big agency world may be all smoke and mirrors, but we deliver authentic, results-driven design that speaks for itself.</p>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="star">★</div>
-        <p>All-Star Web Design LLC &copy; 2024</p>
-        <p>Contact us: <a href="mailto:info@allstarwebdesign.com">info@allstarwebdesign.com</a></p>
-    </footer>
+  <!-- Contact Section -->
+  <section id="contact" class="container">
+    <h2>Contact Us</h2>
+    <p>Have questions or ready to get started? Email us at <a href="mailto:hello@allstarwebdesignllc.com">hello@allstarwebdesignllc.com</a></p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 All-Star Web Design LLC. All rights reserved.</p>
+  </footer>
 
 </body>
 </html>
