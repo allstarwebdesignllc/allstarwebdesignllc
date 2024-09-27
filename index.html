@@ -61,8 +61,6 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      border-radius: 0 0 10px 10px; /* Rounded bottom corners */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Drop shadow */
       position: relative; /* Required for background ball positioning */
       overflow: hidden; /* Prevents any content from spilling over */
     }
@@ -283,11 +281,12 @@
   position: relative; /* Needed to position the plus button */
   cursor: pointer;
   transition: background-color 0.3s ease;
+  overflow: hidden; /* Prevents content overflow */
 }
 
 .faq-item h3 {
   font-size: 1.2rem;
-  transition: color 0.3s ease;
+  margin-right: 40px; /* Ensure space for the plus button */
 }
 
 .faq-item p {
@@ -310,7 +309,7 @@
   transform: translateY(-50%);
   font-size: 24px;
   background-color: #ccc;
-  border-radius: 50%;
+  border-radius: 6px;
   width: 36px;
   height: 36px;
   display: flex;
@@ -321,10 +320,6 @@
 
 .plus-button:hover {
   background-color: #aaa;
-}
-
-.faq-item.active .plus-button {
-  transform: translateY(-50%) rotate(45deg); /* Rotate to a minus sign */
 }
 
     /* Footer Styling */
@@ -448,7 +443,12 @@
   
     <div class="faq-item">
       <h3>What services do you offer?</h3>
-      <p>We offer a full range of marketing services including landing page design, branding, SEO, and more.</p>
+      <p>We offer a full range of marketing services including landing page design, branding, SEO, and more:<br>
+        - Website Audits<br>
+        - Custom Web Design<br>
+        - Landing Page Development<br>
+        - SEO Optimization<br>
+        - UX/UI Strategy & Design (including modern UI/UX practices)</p>
       <div class="plus-button">+</div>
     </div>
   
@@ -543,10 +543,9 @@
 
   setInterval(changeWord, 2000); // Change word every 2 seconds
 
-  document.querySelectorAll('.faq-item h3').forEach(item => {
+  document.querySelectorAll('.faq-item').forEach(item => {
     item.addEventListener('click', () => {
-      const faqItem = item.parentElement;
-      faqItem.classList.toggle('active');
+      item.classList.toggle('active');
     });
   });
   
