@@ -3,208 +3,192 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="All-Star Web Design LLC - Stellar websites for pre-launch companies that want to scale with professional websites.">
   <title>All-Star Web Design LLC</title>
-  <!-- Link to Pico CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
   <style>
-    /* Off-white background */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background-color: #f7f7f7;
-    }
-
-    /* Opaque header */
-    header {
-      background-color: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-    }
-
-    /* Left-side logo */
-    .brand {
       font-family: 'Open Sans', sans-serif;
-      font-size: 1.5rem;
+      background-color: #f7f7f7; /* Slight off-white */
+      color: #333;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.9); /* Opaque background */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 24px;
+      font-weight: bold;
       display: flex;
       align-items: center;
     }
 
-    .brand span {
-      margin-left: 0.5rem;
+    header h1::before {
+      content: '★'; /* Star icon */
+      margin-right: 8px;
+      font-size: 24px;
+      color: red; /* Star color */
     }
 
-    /* Hamburger menu */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 30px;
-      height: 22px;
+    .menu-toggle {
       cursor: pointer;
-      transition: all 0.3s ease-in-out;
+      width: 30px;
+      height: 30px;
+      position: relative;
     }
 
-    .hamburger div {
-      height: 3px;
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 4px;
       background-color: #333;
-      transition: all 0.3s ease-in-out;
+      margin: 6px 0;
+      transition: all 0.3s ease;
     }
 
-    .hamburger.active div:nth-child(1) {
+    .menu-toggle.active span:nth-child(1) {
       transform: rotate(45deg) translate(5px, 5px);
     }
 
-    .hamburger.active div:nth-child(2) {
+    .menu-toggle.active span:nth-child(2) {
       opacity: 0;
     }
 
-    .hamburger.active div:nth-child(3) {
+    .menu-toggle.active span:nth-child(3) {
       transform: rotate(-45deg) translate(5px, -5px);
     }
 
-    /* Mobile responsive nav menu */
+    nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      transform: translateY(-100%);
+      transition: transform 0.4s ease;
+      border-radius: 0 0 10px 10px;
+    }
+
+    nav.active {
+      transform: translateY(0);
+    }
+
     nav ul {
-      display: flex;
-      gap: 1rem;
-    }
-
-    @media (max-width: 768px) {
-      nav ul {
-        display: none;
-        flex-direction: column;
-        gap: 1rem;
-        background-color: white;
-        padding: 1rem;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        width: 100%;
-        max-width: 300px;
-        border-radius: 0 0 10px 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out;
-        transform: translateY(-100%);
-      }
-
-      nav ul.active {
-        transform: translateY(0);
-      }
-
-      .hamburger {
-        display: flex;
-      }
-    }
-
-    .hero-headline {
-      font-size: 2rem;
-      color: #333;
-      max-width: 600px;
-    }
-
-    .hero-description {
-      font-size: 1.2rem;
-      color: #666;
-      margin: 1rem 0;
-    }
-
-    .email-btn {
-      background-color: #007bff;
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 5px;
-      border: none;
-      transition: background-color 0.3s ease-in-out;
-    }
-
-    .email-btn:hover {
-      background-color: #0056b3;
-    }
-
-    footer {
-      background-color: #222;
-      color: white;
-      padding: 2rem 0;
+      list-style: none;
+      padding: 20px;
       text-align: center;
+    }
+
+    nav ul li {
+      margin: 10px 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      font-size: 18px;
+      color: #333;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: red; /* Accent color */
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background-color: white;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      color: #007bff;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin: 20px 0;
+      color: #555;
+    }
+
+    .cta-button {
+      padding: 15px 30px;
+      background-color: red;
+      color: white;
+      border: none;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #d60d0d;
+    }
+
+    @media (min-width: 768px) {
+      .hero h2 {
+        font-size: 3rem;
+      }
+
+      .hero p {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="container">
-    <nav class="grid">
-      <!-- Left side: All-Star with star icon -->
-      <div class="brand">
-        <span>&#9733;</span> <!-- HTML Star -->
-        <span>All-Star</span>
-      </div>
+<header>
+  <h1>All-Star</h1>
+  <div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</header>
 
-      <!-- Right side: Hamburger menu -->
-      <div class="hamburger" onclick="toggleMenu()">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+<nav id="navMenu">
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-      <!-- Mobile nav menu -->
-      <ul id="menu">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+<section class="hero">
+  <h2>Creating Websites That Make You Stand Out</h2>
+  <p>We make your business look bigger than it actually is.</p>
+  <button class="cta-button">Get Started</button>
+</section>
 
-  <!-- Hero Section -->
-  <section class="hero-section container">
-    <div>
-      <h1 class="hero-headline">Elevate Your Brand with a Website That Looks Like a Million-Dollar Company</h1>
-      <p class="hero-description">We build high-quality, perception-shifting websites that make your startup look like a leader in your industry.</p>
-      <a href="#contact" class="email-btn">Get Started Now</a>
-    </div>
-  </section>
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
 
-  <!-- Services Section -->
-  <section id="services" class="services container">
-    <h2>Our Services</h2>
-    <p>"Perception is reality." We make sure your first impression counts.</p>
-    <ul>
-      <li>Website Audits</li>
-      <li>Custom Web Design</li>
-      <li>Landing Page Development</li>
-      <li>SEO Optimization</li>
-      <li>UX/UI Strategy & Design (including modern UI/UX practices)</li>
-    </ul>
-  </section>
-
-  <!-- About Us Section -->
-  <section id="about" class="container">
-    <h2>About Us</h2>
-    <p>At All-Star Web Design LLC, we believe that "marketing is simply finding out what people want, and giving it to them." We specialize in landing pages that provide the perception of scale for pre-launch companies. The big agency world may be all smoke and mirrors, but we deliver authentic, results-driven design that speaks for itself.</p>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="container">
-    <h2>Contact Us</h2>
-    <p>Have questions or ready to get started? Email us at <a href="mailto:hello@allstarwebdesignllc.com">hello@allstarwebdesignllc.com</a></p>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2024 All-Star Web Design LLC. All rights reserved.</p>
-  </footer>
-
-  <script>
-    // Mobile menu toggle
-    function toggleMenu() {
-      const menu = document.getElementById('menu');
-      const hamburger = document.querySelector('.hamburger');
-      menu.classList.toggle('active');
-      hamburger.classList.toggle('active');
-    }
-  </script>
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
+  });
+</script>
 
 </body>
 </html>
