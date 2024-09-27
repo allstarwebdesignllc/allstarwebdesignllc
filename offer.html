@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer - Simplify Home Buying</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700|Open+Sans:400,600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- CSS Styles -->
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #6B7280; /* Gray text */
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Primary colors */
+        :root {
+            --primary-blue: #1E3A8A;
+            --accent-orange: #F97316;
+            --dark-blue: #1E3A8A;
+            --light-gray: #F9FAFB;
+            --gray-text: #6B7280;
+            --white: #FFFFFF;
+        }
+        /* Header Styling */
+header {
+    position: fixed;
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px; /* Space between the buttons */
+}
+
+/* Default Sign In Button */
+.btn-signin {
+    background: rgba(255, 255, 255, 0.2); /* Opaque background */
+    color: white; /* Default text color */
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.3s ease; /* Add transition for smooth color change */
+}
+
+/* Change text color to black on scroll */
+.scrolled .btn-signin {
+    color: black; /* Change text color to black */
+}
+
+.btn-signin:hover {
+    background: rgba(255, 255, 255, 0.4); /* Slightly more opaque on hover */
+}
+
+/* See a Demo Button */
+.btn-demo {
+    background: #FFFF33; /* Match the CTA yellow in the hero */
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+.btn-demo:hover {
+    background: #CCCC00; /* Darken on hover */
+}
+
+.nav-menu {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-menu ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.menu-item {
+    position: relative; /* Required for positioning sub-menus */
+}
+
+/* Main Menu Items */
+.nav-menu ul li a {
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space for arrow icon */
+}
+
+/* Arrow Icon */
+.arrow-icon {
+    font-size: 12px;
+    transition: transform 0.3s;
+}
+
+/* Mega Menu Container */
+.mega-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1000;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+/* Mega Menu Sections */
+.mega-menu-section {
+    margin-bottom: 20px;
+}
+
+/* Section Titles */
+.mega-menu-section h4 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Mega Menu Items */
+.mega-menu-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mega-menu-section ul li {
+    margin-bottom: 15px;
+}
+
+.mega-menu-section ul li a {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space for icons */
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+/* Icon Styling */
+.mega-menu-section ul li a i {
+    width: 24px;
+    height: 24px;
+    background-color: #f0f0f0;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Menu Item Descriptions */
+.mega-menu-section ul li a span {
+    font-size: 12px;
+    color: #777;
+}
+
+/* Show Mega Menu on Hover (Desktop) */
+.menu-item:hover .mega-menu {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .mega-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        flex-direction: column;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    .mega-menu-section {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .mega-menu.open {
+        display: block;
+    }
+
+    .menu-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        border-bottom: 1px solid #ddd;
+    }
+}
+
+/* Rotate the Arrow Icon on Hover */
+.menu-item:hover .arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* Change to black when scrolled */
+.scrolled .nav-menu ul li a {
+    color: black; /* New color when scrolled */
+}
+
+.nav-menu ul li a:hover {
+    color: #FFFF33; /* Highlight color on hover */
+}
+
+/* Hamburger Icon */
+.hamburger {
+    width: 30px;
+    height: 24px;
+    position: relative;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.hamburger-line {
+    width: 100%;
+    height: 4px;
+    background-color: #000;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+/* Line Positions */
+.hamburger-line:nth-child(1) {
+    top: 0;
+}
+
+.hamburger-line:nth-child(2) {
+    top: 10px;
+}
+
+.hamburger-line:nth-child(3) {
+    bottom: 0;
+}
+
+/* X Transformation */
+.hamburger.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg);
+    top: 10px;
+}
+
+.hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg);
+    bottom: 10px;
+}
+
+/* Mobile Menu Slide-down Card */
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white; /* Set background to white for the slide-down effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 0;
+    overflow: hidden; /* Hide content when menu is closed */
+    transition: max-height 0.4s ease; /* Smooth slide-down animation */
+    z-index: 999;
+    border-radius: 0 0 10px 10px; /* Rounded bottom corners for the card */
+}
+
+.menu.open {
+    max-height: 100vh; /* Allow the menu to expand to the full viewport height */
+    overflow-y: auto; /* Enable scrolling if content exceeds the viewport height */
+}
+
+/* Change header background and logo color when menu is open */
+.menu.open ~ header {
+    background-color: white; /* Change the header background to white */
+}
+
+.menu.open ~ header .logo {
+    color: black; /* Change the logo color to black */
+}
+
+/* Change hamburger to X and apply changes */
+.hamburger.active .hamburger-line {
+    background-color: black; /* Change lines to black for the X icon */
+}
+
+.menu-content {
+    padding: 20px; /* Add padding to the content area */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between menu items */
+}
+
+/* Align the logo and close button in the sliding menu */
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Add padding for spacing */
+    border-bottom: 1px solid #ddd; /* Add a divider */
+}
+
+.menu-header .logo {
+    font-size: 24px; /* Adjust logo size if needed */
+}
+
+.menu-header .close-btn {
+    font-size: 24px; /* Adjust the size of the close button */
+    cursor: pointer;
+}
+
+.menu-content a {
+    font-size: 18px;
+    text-decoration: none;
+    color: #000;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+/* Initial Styles */
+.logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: white; /* Logo is white by default */
+    background: transparent; /* Ensure no background color */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition for color change */
+}
+
+.hamburger .hamburger-line {
+    background-color: white; /* Hamburger lines are white by default */
+    transition: background-color 0.3s ease; /* Smooth transition for color change */
+}
+
+/* When Scrolled - Black Color */
+.scrolled .logo {
+    color: black;
+    background: transparent; /* Ensure background remains transparent */
+}
+
+.scrolled .hamburger .hamburger-line {
+    background-color: black;
+}
+        /* Pill Styling */
+        /* Pill Styling */
+.pill {
+    display: inline-flex; /* Use flex to align icon and text */
+    align-items: center; /* Center icon and text vertically */
+    background-color: #275d38; /* Off-color of the forest green */
+    color: #e0e6e3; /* Slight off-white for the text */
+    padding: 5px 15px; /* Reduced padding */
+    border-radius: 999px; /* Full border radius for a pill shape */
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center;
+}
+
+/* Rocketship Icon Styling */
+.pill img {
+    width: 16px; /* Set a smaller width */
+    height: 16px; /* Set a smaller height */
+    margin-right: 8px; /* Space between the icon and the text */
+    object-fit: contain; /* Keep aspect ratio */
+}
+.pill::before {
+    /*content: url('rocketship.png'); /* Replace with your icon path */
+    display: inline-block;
+    margin-right: 8px; /* Space between the icon and text */
+}
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        nav li {
+            margin-left: 30px;
+        }
+        nav a {
+            font-weight: 500;
+            color: var(--primary-blue);
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--accent-orange);
+        }
+        .cta-btn-header {
+            margin-left: 30px;
+            background: var(--accent-orange);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .cta-btn-header:hover {
+            background: #FB923C;
+        }
+        /* Mobile Menu Icon */
+        .mobile-menu-icon {
+            display: none;
+            font-size: 24px;
+            color: var(--primary-blue);
+        }
+        /* Hero Section */
+.hero {
+    background-color: #013220; /* Forest green background */
+    min-height: 100vh; /* Set to full viewport height */
+    display: flex;
+    flex-direction: column; /* Stack content vertically on mobile */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    position: relative;
+    padding: 60px 20px 20px; /* Increase top padding */
+    overflow: hidden; /* Prevents content from overflowing outside the hero section */
+}
+        /*
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+        }
+        */
+        /* Container Styling */
+/* Hero Container */
+.hero-container {
+    display: flex;
+    flex-direction: column; /* Stack content vertically on mobile */
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Ensure it doesn't overflow */
+    max-width: 1200px; /* Set a max width for larger screens */
+    margin: 0 auto; /* Center the content */
+}
+
+/* Hero Content */
+.hero-content {
+    width: 100%;
+    max-width: 600px; /* Limit the maximum width of the text content */
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px; /* Add space between the hero content and the image */
+}
+
+/* Form Styling */
+form {
+    max-width: 500px;
+    margin-top: 24px;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.space-y-2 > * + * {
+    margin-top: 8px;
+}
+
+.lg\\:flex-row {
+    flex-direction: row;
+}
+
+.lg\\:items-center {
+    align-items: center;
+}
+
+.lg\\:space-y-0 > * + * {
+    margin-top: 0;
+}
+
+.lg\\:ml-2 {
+    margin-left: 8px;
+}
+
+/* Adjust Form Input Styling */
+input {
+    height: 54px;
+    flex-grow: 1;
+    border: 1px solid #d1d5db; /* Light border color */
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #ffffff;
+    outline: none;
+    margin-bottom: 5px; /* Add spacing between input and button */
+    font-size: 16px; /* Ensure font size is at least 16px to prevent iOS zoom */
+}
+
+input:focus {
+    border-color: #1E3A8A; /* Example focus color */
+}
+
+input::placeholder {
+    color: #6b7280; /* Gray placeholder text */
+}
+
+/* Button Styling */
+button {
+    background-color: #FFFF33; /* Example button color */
+    color: #000000;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    min-width: 144px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    border: none; /* Add this line to remove the border */
+    margin-top: 5px; /* Add spacing above the button */
+}
+
+button:hover {
+    background-color: #CCCC00; /* Darker shade on hover */
+}
+
+.mt-2 {
+    margin-top: 8px;
+}
+
+.lg\\:mt-0 {
+    margin-top: 0;
+}
+
+/* Comparison Section */
+.comparison-section {
+    padding: 60px 20px;
+    background-color: #f9fafb; /* Light gray background */
+}
+
+.section-title {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1E3A8A; /* Primary blue */
+    margin-bottom: 40px;
+}
+
+/* Comparison Table */
+.comparison-table {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    color: #6B7280; /* Gray text */
+}
+
+.comparison-table thead {
+    background-color: #1E3A8A; /* Primary blue */
+    color: white;
+}
+
+.comparison-table th, .comparison-table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+
+.comparison-table tbody tr:nth-child(even) {
+    background-color: #f3f4f6; /* Light alternate row background */
+}
+
+.comparison-table tbody tr:hover {
+    background-color: #e5e7eb; /* Row hover effect */
+}
+
+/* New Responsive Table Styles */
+.comparison-table-wrapper {
+    overflow-x: auto; /* Allow horizontal scroll if content overflows */
+    width: 100%; /* Ensure it fits within the parent container */
+}
+
+.comparison-table {
+    min-width: 600px; /* Set a minimum width for the table */
+}
+
+@media (max-width: 768px) {
+    .comparison-table th, .comparison-table td {
+        padding: 10px; /* Reduce padding for mobile view */
+    }
+}
+
+/* Hero Image Styling */
+.hero-image {
+    flex: 1;
+    width: 100%;
+    max-width: 600px; /* Set a max width to prevent overflow */
+    margin: 20px auto; /* Add bottom margin to separate the image from the next section */
+    overflow: hidden; /* Hide overflow */
+    border-radius: 12px; /* Adds rounded corners */
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+    .hero-container {
+        flex-direction: column; /* Stack content vertically on mobile */
+    }
+
+    .hero-content, .hero-image {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .nav-menu, .header-buttons {
+        display: none; /* Hide the navigation menu and buttons on mobile */
+    }
+
+    .hamburger{
+        display: flex;
+    }
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 600px; /* Limit the maximum width of the text content */
+    padding: 20px;
+    text-align: center;
+}
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 40px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        .hero .cta-btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            background: var(--accent-orange);
+            color: var(--white);
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .hero .cta-btn:hover {
+            background: #FB923C;
+        }
+        /* Sections */
+        section {
+            padding: 60px 20px;
+        }
+        .section-title {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 40px;
+        }
+        /* Features Section */
+        .features {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .feature {
+            text-align: center;
+            margin-bottom: 40px;
+            max-width: 300px;
+        }
+        .feature i {
+            font-size: 50px;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+        .feature h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+        .feature p {
+            color: var(--gray-text);
+        }
+        /* Benefits Section */
+        .benefits {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .benefit-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 60px;
+            max-width: 800px;
+        }
+        .benefit-block:nth-child(even) .benefit-content {
+            order: 2;
+        }
+        .benefit-image {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .benefit-image img {
+            border-radius: 10px;
+        }
+        .benefit-content {
+            text-align: center;
+        }
+        .benefit-content h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+        /* Social Proof Section */
+        .testimonials {
+            text-align: center;
+        }
+        .testimonial {
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .testimonial h4 {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+        .partner-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .partner-logos img {
+            margin: 10px 15px;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+            width: 100px;
+        }
+        .partner-logos img:hover {
+            opacity: 1;
+        }
+        /* Mid-Page CTA */
+        .mid-cta {
+            background: var(--primary-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .mid-cta h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .mid-cta .cta-btn {
+            background: var(--accent-orange);
+            color: var(--white);
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .mid-cta .cta-btn:hover {
+            background: #FB923C;
+        }
+        /* Footer */
+        footer {
+            background: var(--dark-blue);
+            color: var(--white);
+            padding: 40px 20px;
+        }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .footer-section {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .footer-section h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .footer-section ul {
+            list-style: none;
+        }
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        .footer-section ul li a {
+            color: var(--white);
+            transition: color 0.3s;
+        }
+        .footer-section ul li a:hover {
+            color: var(--accent-orange);
+        }
+        .social-icons a {
+            margin: 0 10px;
+            color: var(--white);
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: var(--accent-orange);
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #A1A1AA;
+        }
+        /* Responsive Styles */
+        @media (min-width: 768px) {
+            /* Header */
+            header {
+                padding: 20px 50px;
+            }
+            .mobile-menu-icon {
+                display: none;
+            }
+            .hero-container {
+        flex-direction: row; /* Horizontal layout */
+        display: flex;
+        align-items: center;
+    }
+    .hero-content {
+        flex: 1;
+        text-align: left; /* Align text to the left */
+        padding-right: 20px; /* Add spacing between text and image */
+    }
+
+    .hero-image {
+        flex: 1;
+        max-width: 50%; /* Limit image width */
+    }
+
+    .hero-image img {
+        height: 100%; /* Make the image fill the container height */
+        max-height: 400px; /* Set a max height to avoid excessive size */
+        object-fit: cover; /* Make sure the image covers the container */
+    }
+            nav ul {
+                display: flex;
+            }
+            /* Hero Section */
+            .hero h1 {
+                font-size: 48px;
+            }
+            .hero p {
+                font-size: 24px;
+            }
+            /* Features Section */
+            .features {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .feature {
+                margin: 20px;
+                max-width: 300px;
+            }
+            /* Benefits Section */
+            .benefits {
+                flex-direction: column;
+            }
+            .benefit-block {
+                flex-direction: row;
+                align-items: center;
+            }
+            .benefit-block:nth-child(even) .benefit-content {
+                order: 1;
+            }
+            .benefit-image, .benefit-content {
+                flex: 1;
+                margin: 20px;
+                text-align: left;
+            }
+            /* Footer */
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .footer-section {
+                text-align: left;
+                margin: 20px;
+            }
+        }
+        @media (max-width: 767px) {
+            .mobile-menu-icon {
+                display: block;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background: var(--white);
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            nav ul.open {
+                display: flex;
+            }
+            nav li {
+                margin: 10px 0;
+            }
+            .cta-btn-header {
+                display: none;
+            }
+            .features, .benefits, .testimonials, .footer-content {
+                align-items: center;
+            }
+            .feature, .benefit-block, .testimonial, .footer-section {
+                margin: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Offer</div>
+    
+    <!-- Navigation Menu -->
+<nav class="nav-menu">
+    <ul>
+        <li class="menu-item">
+            <a href="#">Products <i class="fas fa-chevron-down arrow-icon"></i></a>
+            <!-- Mega Menu for Products -->
+            <div class="mega-menu">
+                <!-- Products Section -->
+                <div class="mega-menu-section">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-credit-card"></i> Corporate Cards <span>Control spend before it happens.</span></a></li>
+                        <li><a href="#"><i class="fas fa-file-invoice-dollar"></i> Accounts Payable <span>Process AP in minutes.</span></a></li>
+                    </ul>
+                </div>
+                <!-- Platform Section -->
+                <div class="mega-menu-section">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-sync-alt"></i> Integrations <span>Connect to your finance stack.</span></a></li>
+                        <li><a href="#"><i class="fas fa-chart-line"></i> Reporting <span>Get full visibility in real-time.</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="menu-item">
+            <a href="#">Solutions <i class="fas fa-chevron-down arrow-icon"></i></a>
+            <!-- Mega Menu for Solutions -->
+            <div class="mega-menu">
+                <div class="mega-menu-section">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-briefcase"></i> Solution 1</a></li>
+                        <li><a href="#"><i class="fas fa-chart-line"></i> Solution 2</a></li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li><a href="#">Customers</a></li>
+        <li><a href="#">Resources</a></li>
+        <li><a href="#">Pricing</a></li>
+    </ul>
+</nav>
+    
+        <!-- Hamburger Icon -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+        </div>
+    
+        <!-- Right-Side Buttons -->
+        <div class="header-buttons">
+            <button class="btn-signin">Sign in</button>
+            <button class="btn-demo">See a demo</button>
+        </div>
+    </header>
+    
+        <!-- Sliding Menu -->
+        <div class="menu" id="menu">
+            <div class="menu-header">
+                <div class="logo">Offer</div>
+                <div class="close-btn" onclick="toggleMenu()">&#10005;</div> <!-- Unicode for X -->
+            </div>
+            <div class="menu-content">
+                <a href="#">Products</a>
+                <a href="#">Solutions</a>
+                <a href="#">Customers</a>
+                <a href="#">Resources</a>
+                <a href="#">Pricing</a>
+            </div>
+        </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Simplify Home Buying</h1>
+                <p>Innovative technology making every home purchase seamless.</p>
+    
+                <!-- New Pill Section -->
+                <div class="pill">
+                    <img src="rocketship.png" alt="Rocketship Icon">
+                    $1M in Pre-sales
+                </div>
+    
+                <!-- Email Form Section -->
+                <form class="max-w-[500px] mt-6" action="" method="POST">
+                    <div class="flex flex-col space-y-2 lg:flex-row lg:items-center lg:space-y-0">
+                        <label class="sr-only" for="email">Email</label>
+                        <input class="h-[54px] grow border border-black-100 p-4 rounded-md text-center lg:text-start lg:bg-transparent lg:border-transparent outline-none placeholder:text-primary bg-white" 
+                               type="email" id="email" placeholder="What's your work email?" required aria-label="Enter your work email">
+                        <button class="mt-2 lg:mt-0 lg:ml-2 bg-yellow-400 hover:bg-yellow-500 text-black px-5 py-4 rounded transition ease-in-out duration-300 min-w-[144px]" 
+                                type="submit" aria-label="Get started for free">
+                            Get started for free
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="hero-image">
+                <img src="offer_example_nobg.png" alt="Hero Image">
+            </div>
+        </div>
+    </section>
+    <section id="comparison" class="comparison-section">
+        <h2 class="section-title">Offer vs Competitors</h2>
+        <!-- Wrap the table in a new div for responsiveness -->
+        <div class="comparison-table-wrapper">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Features</th>
+                        <th>Offer</th>
+                        <th>Skyslope</th>
+                        <th>Dotloop</th>
+                        <th>Lone Wolf</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ease of Use</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                        <td>⭐⭐⭐</td>
+                        <td>⭐⭐⭐</td>
+                        <td>⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td>Pricing</td>
+                        <td>Flexible</td>
+                        <td>Expensive</td>
+                        <td>Moderate</td>
+                        <td>Expensive</td>
+                    </tr>
+                    <tr>
+                        <td>Feature Set</td>
+                        <td>Comprehensive</td>
+                        <td>Limited</td>
+                        <td>Basic</td>
+                        <td>Comprehensive</td>
+                    </tr>
+                    <tr>
+                        <td>Customer Support</td>
+                        <td>24/7 Support</td>
+                        <td>Business Hours</td>
+                        <td>Business Hours</td>
+                        <td>Limited</td>
+                    </tr>
+                    <tr>
+                        <td>Integration Capabilities</td>
+                        <td>Seamless Integration</td>
+                        <td>Limited</td>
+                        <td>Moderate</td>
+                        <td>Moderate</td>
+                    </tr>
+                    <tr>
+                        <td>Cloud-based</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                    </tr>
+                    <tr>
+                        <td>Data Security</td>
+                        <td>Top-tier Encryption</td>
+                        <td>Standard</td>
+                        <td>Standard</td>
+                        <td>Standard</td>
+                    </tr>
+                    <tr>
+                        <td>User Interface Design</td>
+                        <td>Modern & Intuitive</td>
+                        <td>Outdated</td>
+                        <td>Basic</td>
+                        <td>Outdated</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2 class="section-title">Why Choose Offer?</h2>
+        <div class="feature">
+            <i class="fas fa-exchange-alt"></i>
+            <h3>Seamless Transactions</h3>
+            <p>Experience a smooth and efficient home buying process with our integrated platform.</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-bell"></i>
+            <h3>Real-Time Updates</h3>
+            <p>Stay informed with instant notifications and updates every step of the way.</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-lock"></i>
+            <h3>Secure Document Handling</h3>
+            <p>Your documents are safe with top-notch security and encryption.</p>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="benefits" style="background-color: var(--light-gray);">
+        <div class="benefit-block">
+            <div class="benefit-image">
+                <img src="path_to_your_image.jpg" alt="Happy couple using a tablet in their new home">
+            </div>
+            <div class="benefit-content">
+                <h3>Save Time and Reduce Stress</h3>
+                <p>Logan simplifies the home buying process, eliminating unnecessary paperwork and delays.</p>
+            </div>
+        </div>
+        <div class="benefit-block">
+            <div class="benefit-image">
+                <img src="path_to_your_image.jpg" alt="Secure document handling">
+            </div>
+            <div class="benefit-content">
+                <h3>Security You Can Trust</h3>
+                <p>We prioritize your privacy with advanced security measures to keep your information safe.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section id="testimonials" class="testimonials">
+        <h2 class="section-title">Trusted by Professionals Nationwide</h2>
+        <div class="testimonial">
+            <p>"Logan has revolutionized how we handle home purchases."</p>
+            <h4>Jane Smith, Real Estate Agent</h4>
+        </div>
+        <div class="partner-logos">
+            <img src="path_to_partner_logo.jpg" alt="Partner Logo 1">
+            <img src="path_to_partner_logo.jpg" alt="Partner Logo 2">
+            <img src="path_to_partner_logo.jpg" alt="Partner Logo 3">
+            <!-- Add more logos as needed -->
+        </div>
+    </section>
+
+    <!-- Mid-Page CTA Section -->
+    <section class="mid-cta">
+        <h2>Ready to Experience the Future of Home Buying?</h2>
+        <a href="#" class="cta-btn">Get Early Access</a>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Logan</h4>
+                <p>Transforming home buying across America with innovative technology.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <!-- Add more social icons as needed -->
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 Logan. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JavaScript for header scroll effect and mobile menu -->
+    <script>
+       // Mobile menu toggle
+function toggleMenu() {
+    const menu = document.getElementById('menu');
+    const hamburger = document.querySelector('.hamburger');
+    const header = document.querySelector('header');
+    const logo = document.querySelector('.logo');
+
+    // Toggle the menu open/close
+    menu.classList.toggle('open');
+    hamburger.classList.toggle('active');
+
+    // Toggle the header and logo styles
+    if (menu.classList.contains('open')) {
+        header.style.backgroundColor = 'white';
+        logo.style.color = 'black';
+    } else {
+        header.style.backgroundColor = 'transparent';
+        logo.style.color = 'white';
+    }
+}
+
+// Show/Hide the mega menu on hover for desktop
+document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        const megaMenu = item.querySelector('.mega-menu');
+        if (megaMenu) {
+            megaMenu.style.display = 'flex';
+        }
+    });
+
+    item.addEventListener('mouseleave', () => {
+        const megaMenu = item.querySelector('.mega-menu');
+        if (megaMenu) {
+            megaMenu.style.display = 'none';
+        }
+    });
+});
+
+window.addEventListener('scroll', () => {
+    const heroSection = document.querySelector('.hero');
+    const header = document.querySelector('header');
+    const navLinks = document.querySelectorAll('.nav-menu ul li a');
+    const signInButton = document.querySelector('.btn-signin');
+    
+    // Calculate 70% of the hero section height
+    const scrollPoint = heroSection.offsetHeight * 0.7;
+
+    if (window.scrollY > scrollPoint) {
+        header.classList.add('scrolled');
+        navLinks.forEach(link => link.classList.add('scrolled'));
+        signInButton.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+        navLinks.forEach(link => link.classList.remove('scrolled'));
+        signInButton.classList.remove('scrolled');
+    }
+});
+// Add event listeners to menu items with sub-menus
+document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+        // Toggle the visibility of the sub-menu
+        const megaMenu = item.querySelector('.mega-menu');
+        if (megaMenu) {
+            megaMenu.classList.toggle('open');
+        }
+
+        // Rotate the arrow icon
+        const arrowIcon = item.querySelector('.arrow-icon');
+        if (arrowIcon) {
+            arrowIcon.classList.toggle('rotate');
+        }
+
+        // Prevent closing of other mega menus when clicking on the current one
+        e.stopPropagation();
+    });
+});
+
+// Close all sub-menus when clicking outside
+document.body.addEventListener('click', () => {
+    document.querySelectorAll('.mega-menu').forEach(menu => {
+        menu.classList.remove('open');
+    });
+
+    document.querySelectorAll('.arrow-icon').forEach(icon => {
+        icon.classList.remove('rotate');
+    });
+});
+// Add event listeners to menu items with sub-menus
+document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        const megaMenu = item.querySelector('.mega-menu');
+        if (megaMenu) {
+            megaMenu.classList.add('open');
+        }
+    });
+
+    item.addEventListener('mouseleave', () => {
+        const megaMenu = item.querySelector('.mega-menu');
+        if (megaMenu) {
+            megaMenu.classList.remove('open');
+        }
+    });
+});
+    </script>
+</body>
+</html>
